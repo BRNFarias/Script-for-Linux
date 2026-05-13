@@ -1,2 +1,2 @@
 # Script-for-Linux
-Script para criação de usuário, pastas e grupos de forma automatizada (Projeto em construção)
+Script para criação de usuário, pastas e grupos de forma automatizada (Projeto Finalizado)
