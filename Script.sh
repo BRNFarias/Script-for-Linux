@@ -1,43 +1,28 @@
-#!/bin/bash
-
-echo "=============Criação de Pastas============="
-
-read -p "Selecione a quantidade de pastas: " qtd_pasta
-
-for ((i=1; i<=qtd_pasta; i++))
-do
-        echo ""
-        echo "Pasta $i"
-        read -p "Digite o nome da pasta: " nome_pasta
-        mkdir $nome_pasta
-        echo "$nome_pasta" >> pastas_criadas.txt
-        echo "Pasta criada com sucesso"
-done
-
-echo ""
-echo "Finalizado"
-
-echo "=============Criação de Grupos============="
-
-groupadd grp_adm
-groupadd grp_ven
 groupadd grp_sec
-
-echo "Grupos criados com sucesso"
-
-echo "=============Criação de Usuários============="
-
-read -p "Quantos usuários serão criados: " qtd_user
-
-for ((i=1; i<=qtd_user; i++))
-do
-        echo ""
-        echo "Usuário $i"
-        read -p "Escreva o nome do usuário: " usuario
-        useradd $usuario -m -s /bin/bash -p $(openssl passwd -6 Senha123)
-        echo "$usuario" >> usuarios_criados.txt
-        echo "Usuário $usuario criado com sucesso!"
-done
-
 echo ""
-echo "Finalizado"
+
+echo "Criando Usuarios..."
+echo ""
+useradd Carlos -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_adm
+useradd Maria -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_adm
+useradd Joao -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_adm
+useradd Debora -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_ven
+useradd Sebastiana -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_ven
+useradd Roberto -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_ven
+useradd Josefina -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_sec
+useradd Amanda -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_sec
+useradd Rogerio -m -s /bin/bash -p $(openssl passwd -6 Senha) -G grp_sec
+echo ""
+
+echo "Configurando permissões das pastas..."
+echo ""
+
+chown root:grp_adm adm
+chown root:grp_ven ven
+chown root:grp_sec sec
+
+chmod 770 adm
+chmod 770 ven
+chmod 770 sec
+
+chmod 777 publico
